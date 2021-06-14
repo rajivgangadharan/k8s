@@ -1,0 +1,44 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "k8s_cp" do | k8s_cp | 
+  	k8s_cp.vm.box = "ubuntu/trusty64"
+  	k8s_cp.vm.box_check_update = true
+  	k8s_cp.vm.hostname = "k8scp"
+  	k8s_cp.vm.network "private_network", ip: "192.168.33.10"
+  	k8s_cp.vm.network "public_network", bridge: "wlp3s0"
+  	k8s_cp.vm.synced_folder "../vagrant_data", "/vagrant_data"
+  	#
+  	k8s_cp.vm.provider "virtualbox" do |vb|
+    		vb.gui = false
+    		vb.memory = "1024"
+  	end
+  end
+  config.vm.define "k8s_wkr1" do | k8s_wkr1 |
+  	k8s_wkr1.vm.box = "ubuntu/trusty64"
+  	k8s_wkr1.vm.box_check_update = true
+  	k8s_wkr1.vm.hostname = "k8swkr1"
+  	k8s_wkr1.vm.network "private_network", ip: "192.168.33.14"
+  	k8s_wkr1.vm.network "public_network", bridge: "wlp3s0"
+  	k8s_wkr1.vm.synced_folder "../vagrant_data", "/vagrant_data"
+  	#
+  	k8s_wkr1.vm.provider "virtualbox" do |vb|
+		vb.gui = false
+    		vb.memory = "1024"
+	end
+  end
+  config.vm.define "k8s_wkr2" do | k8s_wkr2 |
+	  k8s_wkr2.vm.box = "ubuntu/trusty64"
+	  k8s_wkr2.vm.box_check_update = true
+	  k8s_wkr2.vm.hostname = "k8swkr2"
+	  k8s_wkr2.vm.network "private_network", ip: "192.168.33.15"
+	  k8s_wkr2.vm.network "public_network", bridge: "wlp3s0"
+	  k8s_wkr2.vm.synced_folder "../vagrant_data", "/vagrant_data"
+	  #
+	  k8s_wkr2.vm.provider "virtualbox" do |vb|
+	    vb.gui = false
+	    vb.memory = "1024"
+	  end
+  end
+end

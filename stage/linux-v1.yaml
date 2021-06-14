@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: alpine-linux
+  name: alpine-linux
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: alpine-linux
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: alpine-linux
+    spec:
+      containers:
+      - image: alpine:3.13
+        name: alipine
+        resources: {}
+status: {}
